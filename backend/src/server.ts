@@ -6,29 +6,37 @@ import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Allow Cross-Origin Resource Sharing
+
+app.use(cors())
 app.use(cors({
-  origin: 'http://localhost:5173' // Allow requests from the Vite frontend
+  origin: 'http://localhost:5173' 
 }));
-app.use(express.json()); // Parse JSON request body
+app.use(express.json()); 
 
 const messages = [
   {
-    text: "Hi there!",
+    message: "Hi there!",
     user: "Amando",
     added: new Date()
   },
   {
-    text: "Hello World!",
+    message: "Hello World!",
     user: "Charles",
     added: new Date()
   }
 ];
 
-// --- API Routes ---
+
 app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from the backend!' });
+  res.json({ messages:messages });
+});
+app.post('/new', (req: Request, res: Response) => {
+  const { user, message } = req.body; 
+  messages.push({user,message,added: new Date()});
+  console.log('Username:', user);
+  console.log('Message:', message);
+
+  res.send('Form submitted successfully!');
 });
 
 app.get('/api/status', (req: Request, res: Response) => {
@@ -38,6 +46,8 @@ app.get('/api/status', (req: Request, res: Response) => {
 app.get('/api/message', (req: Request, res: Response) => {
   res.json({ message: 'Hello from the backend!' });
 });
+
+
 // --- Static Files in Production ---
 if (process.env.NODE_ENV === 'production') {
   // Serve React static files
@@ -49,13 +59,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// --- Error Handling Middleware ---
+
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.message);
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
