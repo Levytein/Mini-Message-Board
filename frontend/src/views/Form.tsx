@@ -22,7 +22,7 @@ function Form({createMessage,setCreateMessage,setFetchTrigger}) {
   
     if (response.ok) {
       const result = await response.text();
-      console.log(result); // e.g., "Form submitted successfully!"
+      console.log(result); 
     } else {
       console.error('Error submitting form');
     }

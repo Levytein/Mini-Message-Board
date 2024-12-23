@@ -1,5 +1,9 @@
-$darkThemeColor1: rgb(36, 36, 36);
-$darkThemeColor2: rgb(29, 29, 29);
+$darkThemeColor1: hsla(252, 80%, 6%, 1);
+
+$darkThemeColor2: hsl(243.33,25%,14.12%);
+
+$darkThemeColor3:#341948;
+$darkThemeColor4:#9388A2;
 $lightThemeColor1:rgb(244, 242, 230);
 .darkTheme{
   background-color: $darkThemeColor1;
@@ -29,7 +33,7 @@ $lightThemeColor1:rgb(244, 242, 230);
     color:black;
   }
   .themeSwitcher{
-    background-color: white;
+    background-color: deepskyblue;
 
     &:hover{
       background-color: grey;
@@ -70,8 +74,9 @@ $lightThemeColor1:rgb(244, 242, 230);
     }
     
     .newMessageButton{
-      background-color: rgb(218, 21, 51);
-      border: none;
+      background-color: white;
+      color:black;
+      border:none;
       border-radius: 15px;
       font-weight:600;
       width:150px;
@@ -96,8 +101,9 @@ $lightThemeColor1:rgb(244, 242, 230);
       }
     .speechBubble{
       position: relative;
-
-      margin-bottom: 10px;
+      filter: drop-shadow(0px 0px 1px rgb(104, 101, 167))
+      drop-shadow(0px 0px 3px rgb(122, 118, 196));
+      margin-bottom: 15px;
       border-radius: 15px;
       padding-bottom:1rem;
       min-height:100px;
@@ -105,6 +111,7 @@ $lightThemeColor1:rgb(244, 242, 230);
         text-align: left;
         margin-left:1.5rem;
         margin-top:.5rem;
+        color:white;
       }
       /*.speechTail{
       

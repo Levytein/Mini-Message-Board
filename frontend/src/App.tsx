@@ -22,9 +22,9 @@ function App() {
         );
         const data = await response.json();
   
-        setMessages(data.messages); // Set the messages for the current page
-        setTotalPages(data.totalPages); // Set total pages for pagination
-        setTotalCount(data.totalCount); // Set total number of messages
+        setMessages(data.messages); 
+        setTotalPages(data.totalPages); 
+        setTotalCount(data.totalCount); 
       } catch (err) {
         console.error('Error fetching messages:', err);
       }
@@ -74,7 +74,7 @@ function App() {
  
         </div>
       <div className="themeSwitcherContainer">
-      <button className="themeSwitcher" onClick={toggleTheme}>{isDarkMode ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40px" height="40px" fill="gold">
+      <button className="themeSwitcher" onClick={toggleTheme}>{isDarkMode ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23" width="40px" height="40px" fill="gold">
   <circle cx="12" cy="12" r="5" />
   <g stroke="gold" stroke-width="2" stroke-linecap="round">
     <line x1="12" y1="1" x2="12" y2="5" />
@@ -86,10 +86,10 @@ function App() {
     <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
     <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
   </g>
-</svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40px" height="40px" fill="white">
+</svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23" width="40px" height="40px" fill="white">
   <path d="M21.77 15.3a9 9 0 1 1-9.06-12.3 1 1 0 0 1 .9.6 1 1 0 0 1-.19 1.08A7 7 0 0 0 18 16a1 1 0 0 1 1.9.51 1 1 0 0 1-.13.79Z" />
 </svg>}</button>
-      <button className="newMessageButton" onClick={showMessageForm}>New Message</button>
+      <button className="newMessageButton" onClick={showMessageForm}>Message</button>
       
     
       </div>

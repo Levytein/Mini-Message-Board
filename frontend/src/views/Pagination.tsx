@@ -12,7 +12,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   
     return (
       <div className="pagination">
-        {/* Previous Button */}
+
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
-            
+
             {">"}
 
         </button>

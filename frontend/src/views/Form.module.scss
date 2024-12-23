@@ -1,8 +1,10 @@
-
+$darkThemeColor1: rgb(36, 36, 36);
+$darkThemeColor2: rgb(29, 29, 29);
+$lightThemeColor1:rgb(244, 242, 230);
 .formContainer{
     position: absolute;
     width:100%;
-    z-index:2;
+    z-index:2;  
     .overlay{
  
         height:100vh;
@@ -20,7 +22,8 @@
         top:50%;
         left:50%;
         transform:translate(-50%,-50%);
-        background-color:darkslategrey;
+        background-color:$darkThemeColor2;
+        border:1px solid #7EC8E3;
         border-radius: 10px;
         padding-bottom:2.5rem;
         .usernameInput{
@@ -34,8 +37,9 @@
             input{
                 width:40%;
                 border-radius:5px;
-                background-color: grey;
-                border-style: none;
+                border:1px solid white;
+                background-color: $darkThemeColor1;
+              
                 height:30px;
                 width:90%;
                 padding-left:10px;
@@ -59,6 +63,8 @@
                 height:140px;
                 padding:10px;
                 resize:none;
+                background-color: $darkThemeColor1;
+                border:1px solid white;
                 ::placeholder{
                     color:#888;
                     font-style:italic;
