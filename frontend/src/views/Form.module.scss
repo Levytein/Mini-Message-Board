@@ -1,0 +1,101 @@
+
+.formContainer{
+    position: absolute;
+    width:100%;
+    z-index:2;
+    .overlay{
+ 
+        height:100vh;
+        width:100vw;
+        background-color: rgba(0, 0, 0, .3);
+    
+    }
+
+    form{
+        color:white;
+        position:absolute;
+        height:300px;
+        min-width:25vw;
+        
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        background-color:darkslategrey;
+        border-radius: 10px;
+        padding-bottom:2.5rem;
+        .usernameInput{
+            display:flex;
+            flex-direction:column;
+            align-items: flex-start;
+            margin-left:10%;
+            font-weight:600;
+            font-size:large;
+            margin-top:2rem;
+            input{
+                width:40%;
+                border-radius:5px;
+                background-color: grey;
+                border-style: none;
+                height:30px;
+                width:90%;
+                padding-left:10px;
+                &:focus{
+                    border-color:#007BFF;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                    outline: none;
+                    background-color: rgba(0, 0, 0, .9);
+                }
+            }
+            
+        }
+        .messageInput{
+            display:flex;
+            flex-direction:column;
+            align-items: flex-start;
+            margin-left:10%;
+            font-weight:600;
+            textarea{
+                width:90%;
+                height:140px;
+                padding:10px;
+                resize:none;
+                ::placeholder{
+                    color:#888;
+                    font-style:italic;
+                    
+                }
+                &:focus{
+                    border-color:#007BFF;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                    outline: none;
+                }
+            }
+        }
+
+        .exitButton{
+            position: absolute;
+            border-radius:100px;
+            border-style: none;
+            width:40px;
+            height:40px;
+            left:90%;
+            top:3%;
+        }
+        .submitButton{
+            font-weight:600;
+            width:100px;
+            height:30px;
+            border-radius: 15px;
+            border-style: none;
+            margin-top:1rem;
+            
+            &:hover{
+                border-color:white;
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.781);
+                outline: none;
+            }
+           
+        }
+    }
+}
+

@@ -1,10 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
+import {getAllMessages,insertMessage} from '../db/queries';
+
 
 // Initialize the Express app
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 
 app.use(cors())
@@ -13,28 +15,31 @@ app.use(cors({
 }));
 app.use(express.json()); 
 
-const messages = [
-  {
-    message: "Hi there!",
-    user: "Amando",
-    added: new Date()
-  },
-  {
-    message: "Hello World!",
-    user: "Charles",
-    added: new Date()
+
+app.get('/', async (req, res) => {
+
+  try {
+    const page = parseInt(req.query.page as string, 10) || 1; 
+    const limit = parseInt(req.query.limit as string, 10) || 8; 
+
+    const offset = (page - 1) * limit;
+    const result = await getAllMessages(limit,offset); 
+
+    const messages  = result.rows;
+    const totalCount = result.rows.length > 0 ? parseInt(result.rows[0].total_count, 10) : 0;
+    res.json({messages,
+      totalPages:Math.ceil(totalCount / limit),
+      totalCount,
+    }); 
+    
+  } catch (err) {
+    console.error('Error fetching usernames:', err);
+    res.status(500).json({ error: 'Failed to fetch usernames' });
   }
-];
-
-
-app.get('/api/hello', (req: Request, res: Response) => {
-  res.json({ messages:messages });
 });
-app.post('/new', (req: Request, res: Response) => {
-  const { user, message } = req.body; 
-  messages.push({user,message,added: new Date()});
-  console.log('Username:', user);
-  console.log('Message:', message);
+app.post('/new', async (req: Request, res: Response) => {
+  const { user, message,posted,timeZone} = req.body; 
+  await insertMessage(user,message,posted,timeZone);
 
   res.send('Form submitted successfully!');
 });
