@@ -1,3 +1,6 @@
+
+import './Pagination.scss';
+
 const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     const getPageNumbers = () => {
         const sidePages = 1; 
@@ -13,7 +16,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     return (
       <div className="pagination">
 
-        <button
+        <button className="nav"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -21,16 +24,16 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
         </button>
   
         {getPageNumbers().map((page) => (
-          <button
+          <button 
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? 'active' : ''}
+            className={page === currentPage ? 'nav active' : 'nav inactive'}
           >
             {page}
           </button>
         ))}
   
-        <button
+        <button className="nav"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >

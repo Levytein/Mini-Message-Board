@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import styles from './Form.module.scss';
+import './Form.scss'; 
 
 function Form({createMessage,setCreateMessage,setFetchTrigger}) {
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault(); 
     const localTime = new Date().toLocaleString('en-US', {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
@@ -42,20 +41,20 @@ function Form({createMessage,setCreateMessage,setFetchTrigger}) {
   }, []);
     */
   return (
-    <div className={styles.formContainer} >
-      <div className={styles.overlay}></div>
+    <div className='formContainer' >
+      <div className='overlay'></div>
       <form method='POST' onSubmit={handleSubmit}>
-        <button type="button" onClick={handleExit} className={styles.exitButton}>X</button>
-        <div className={styles.usernameInput}>
+        <button type="button" onClick={handleExit} className='exitButton'>X</button>
+        <div className='usernameInput'>
         <label>Username:</label>
         <input type='text' name="user" id="user" required  />
         </div>
-        <div className={styles.messageInput}>
+        <div className='messageInput'>
         <label>Message:</label>
         <textarea name="message" id="message" placeholder='Enter your message here!' maxLength={100} required />
           
         </div>
-        <button className={styles.submitButton}type='submit'>Submit</button>
+        <button className='submitButton' type='submit'>Submit</button>
       </form>
     </div>
   );

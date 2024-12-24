@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
 import Form from './views/Form';
-import { toZonedTime , format } from 'date-fns-tz';
 import Pagination from './views/Pagination';
+import MessageList from './views/messageList';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -23,6 +23,7 @@ function App() {
         const data = await response.json();
   
         setMessages(data.messages); 
+  
         setTotalPages(data.totalPages); 
         setTotalCount(data.totalCount); 
       } catch (err) {
@@ -40,28 +41,12 @@ function App() {
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
-  const getRandomHSL = () => {
-    const hue = Math.floor(Math.random() * 360); 
-    const hue2 = Math.floor(Math.random() * 360); 
-    return {background: `linear-gradient(90deg, hsl(${hue}, 80%, 50%),  hsl(${hue2}, 60%, 60%)`};
-  };
+  
 
 
 
-
-  function formattedDate(date:string, timeZone:string) {
 
   
-    try {
-      const zonedDate = toZonedTime(date, Intl.DateTimeFormat().resolvedOptions().timeZone); 
-      const formatted = format(zonedDate, 'MM/dd/yyyy hh:mm a');
-      console.log('Formatted Date:', formatted);
-      return formatted;
-    } catch (err) {
-      console.error('Error in formattedDate:', err);
-      return 'Invalid Date';
-    }
-  }
   
 
 
@@ -94,31 +79,7 @@ function App() {
     
       </div>
       </div>
-      <ul>
-      {messages.map((message, index) => {
-            console.log('Message:', message);
-            console.log('Posted:', message.posted);
-            console.log('Time Zone:', message.time_zone);
-
-            return (
-              <li className="userMessageContainer" key={index}>
-                <div className="userIcon" style={getRandomHSL()}>
-
-                </div>
-                <div className="speechBubble" >
-                    
-                <div className="userInfo">
-                  <p className="userName">{message.username}</p>
-                  <p className="datePosted">
-                    {formattedDate(message.posted, message.time_zone)}
-                  </p>
-                </div>
-                <div className="message">{message.message}</div>
-                </div>
-              </li>
-            );
-          })}
-      </ul>
+      <MessageList messages={messages} key={currentPage}  />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

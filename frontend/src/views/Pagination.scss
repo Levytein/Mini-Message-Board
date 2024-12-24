@@ -1,0 +1,20 @@
+.pagination{
+    display:flex;
+    gap:1rem;
+    .nav{
+        border-radius: 50%;
+        border-style:none;
+        width:40px;
+        height:40px;
+   
+        &:disabled{
+            cursor:not-allowed;
+            pointer-events: none;
+            background-color: rgba(132, 54, 209,.4);
+        }
+        &:hover{
+            background-color:rgb(160, 67, 253);
+        }
+    }
+  
+}

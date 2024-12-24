@@ -17,15 +17,16 @@ $lightThemeColor1:rgb(244, 242, 230);
         color:white;
         position:absolute;
         height:300px;
-        min-width:25vw;
+        min-width:60vw;
         
-        top:50%;
-        left:50%;
+        top:30%;
+        left:20%;
         transform:translate(-50%,-50%);
         background-color:$darkThemeColor2;
         border:1px solid #7EC8E3;
         border-radius: 10px;
         padding-bottom:2.5rem;
+        animation:pop .4s 1 forwards;
         .usernameInput{
             display:flex;
             flex-direction:column;
@@ -86,6 +87,11 @@ $lightThemeColor1:rgb(244, 242, 230);
             height:40px;
             left:90%;
             top:3%;
+            &:hover{
+                border-color:white;
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.781);
+           
+            }
         }
         .submitButton{
             font-weight:600;
@@ -104,4 +110,13 @@ $lightThemeColor1:rgb(244, 242, 230);
         }
     }
 }
-
+:global{
+    @keyframes pop{
+        0%{
+            transform: scale(0);
+        }
+        100%{
+            transform:scale(1);
+        }
+    }
+}

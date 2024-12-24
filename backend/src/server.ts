@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
 
   try {
     const page = parseInt(req.query.page as string, 10) || 1; 
-    const limit = parseInt(req.query.limit as string, 10) || 8; 
+    const limit = parseInt(req.query.limit as string, 10) || 6; 
 
     const offset = (page - 1) * limit;
     const result = await getAllMessages(limit,offset); 
