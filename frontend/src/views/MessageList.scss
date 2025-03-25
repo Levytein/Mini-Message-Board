@@ -1,6 +1,20 @@
+@media screen and (min-width: 500px) {
+  ul{
+    width:85%;
+  }
+  .userInfo{
+    width:fit-content;
+    padding-right:1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  ul{
+    width:60%;
+  }
+}
 ul{
     list-style: none;
-    width:60%;
+
   }
   .userMessageContainer{
     display:grid;
@@ -28,7 +42,11 @@ ul{
       text-align: left;
       margin-left:1.5rem;
       margin-top:.5rem;
-
+      p{
+        white-space:normal;
+        overflow-wrap:break-word;
+        word-break:break-all;
+      }
     }
     /*.speechTail{
     
@@ -58,7 +76,7 @@ ul{
     color:white;
 
 
-    width:25%;
+
     border-radius: 15px;
     margin-top:10px;
     padding-left:10px;

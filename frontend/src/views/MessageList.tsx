@@ -1,6 +1,13 @@
 import { toZonedTime , format } from 'date-fns-tz';
 import './MessageList.scss';
-function MessageList({messages}){;
+interface Message {
+  username: string;
+  posted: string;
+  time_zone: string;
+  message: string;
+}
+
+function MessageList({ messages }: { messages: Message[] }) {
 
     const getRandomHSL = () => {
         const hue = Math.floor(Math.random() * 360); 
@@ -41,7 +48,7 @@ function MessageList({messages}){;
                       {formattedDate(message.posted, message.time_zone)}
                     </p>
                   </div>
-                  <div className="message">{message.message}</div>
+                  <div className="message"><p>{message.message}</p></div>
                   </div>
                 </li>
               );

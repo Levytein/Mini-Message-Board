@@ -7,6 +7,20 @@ $lightThemeColor1:rgb(244, 242, 230);
 $lightThemeColor2:hsla(351, 82%, 47%, 1);
 $lightThemeColor2faded:hsla(351, 82%, 47%, .3);
 $lightThemeColor2hover:rgb(248, 108, 129);
+
+@media screen and (min-width: 500px) {
+  .header{
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom:2rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .header{
+    flex-direction: row;
+    justify-content: baseline;
+  }
+}
 .darkTheme{
   background-color: $darkThemeColor1;
   .speechBubble{
@@ -115,7 +129,9 @@ $lightThemeColor2hover:rgb(248, 108, 129);
   align-items: center; 
   text-align: center;
   transition:background-color .2s;
-  overflow:hidden;
+  overflow-y:auto;
+  overflow-x: hidden;
+ 
     .header{
       width:60%;
       display:flex;
