@@ -1,12 +1,14 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
-import {getAllMessages,insertMessage} from '../db/queries';
+import {Filter} from 'bad-words';
+import {getAllMessages,insertMessage} from './db/queries';
 
 
 // Initialize the Express app
 const app = express();
 const PORT = 5000;
+
 
 
 app.use(cors())
@@ -15,7 +17,7 @@ app.use(cors({
 }));
 app.use(express.json()); 
 
-
+const filter = new Filter();
 app.get('/', async (req, res) => {
 
   try {
@@ -38,18 +40,14 @@ app.get('/', async (req, res) => {
   }
 });
 app.post('/new', async (req: Request, res: Response) => {
-  const { user, message,posted,timeZone} = req.body; 
-  await insertMessage(user,message,posted,timeZone);
+  const { user, message, posted, timeZone } = req.body; 
 
-  res.send('Form submitted successfully!');
-});
-
-app.get('/api/status', (req: Request, res: Response) => {
-  res.json({ status: 'Server is running!', timestamp: new Date() });
-});
-
-app.get('/api/message', (req: Request, res: Response) => {
-  res.json({ message: 'Hello from the backend!' });
+  if (filter.isProfane(user) || filter.isProfane(message)) {
+    res.status(400).json({ error: 'Explicit language is not allowed' });
+  }
+  
+  await insertMessage(user, message, posted, timeZone);
+   res.send('Form submitted successfully!');
 });
 
 

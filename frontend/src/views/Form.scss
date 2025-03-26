@@ -1,6 +1,25 @@
 $darkThemeColor1: rgb(36, 36, 36);
 $darkThemeColor2: rgb(29, 29, 29);
 $lightThemeColor1:rgb(244, 242, 230);
+@media screen and (min-width: 500px) {
+    .formContainer{
+        form{
+            min-width:85vw;
+            top:35%;
+            left:10%;
+        }
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .formContainer{
+        form{
+            min-width:60vw;
+                    
+        top:30%;
+        left:20%;
+        }
+    }
+  }
 .formContainer{
     position: absolute;
     width:100%;
@@ -17,10 +36,8 @@ $lightThemeColor1:rgb(244, 242, 230);
         color:white;
         position:absolute;
         height:300px;
-        min-width:60vw;
-        
-        top:30%;
-        left:20%;
+      
+
         transform:translate(-50%,-50%);
         background-color:$darkThemeColor2;
         border:1px solid #7EC8E3;

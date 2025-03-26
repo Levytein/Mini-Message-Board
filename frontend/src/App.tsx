@@ -43,13 +43,6 @@ function App() {
   };
   
 
-
-
-
-  
-  
-
-
   return (
     <div className={!isDarkMode ? "container darkTheme" : "container lightTheme"}>
       {createMessage && <Form createMessage={createMessage} setCreateMessage={setCreateMessage} setFetchTrigger={setFetchTrigger} />}

@@ -15,7 +15,7 @@ function MessageList({ messages }: { messages: Message[] }) {
         return {background: `linear-gradient(90deg, hsl(${hue}, 80%, 50%),  hsl(${hue2}, 60%, 60%)`};
       };
 
-      function formattedDate(date:string, timeZone:string) {
+      function formattedDate(date:string) {
         try {
           const zonedDate = toZonedTime(date, Intl.DateTimeFormat().resolvedOptions().timeZone); 
           const formatted = format(zonedDate, 'MM/dd/yyyy hh:mm a');
@@ -45,7 +45,7 @@ function MessageList({ messages }: { messages: Message[] }) {
                   <div className="userInfo">
                     <p className="userName">{message.username}</p>
                     <p className="datePosted">
-                      {formattedDate(message.posted, message.time_zone)}
+                      {formattedDate(message.posted)}
                     </p>
                   </div>
                   <div className="message"><p>{message.message}</p></div>

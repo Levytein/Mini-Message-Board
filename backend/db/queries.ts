@@ -1,4 +1,5 @@
-const pool = require("./pool");
+import pool from './pool';
+
 
 export async function getAllMessages(limit:number,offset:number) {
     try {
