@@ -1,15 +1,22 @@
 import './Form.scss'; 
 
-function Form({createMessage,setCreateMessage,setFetchTrigger}) {
+interface FormProps {
+  createMessage: boolean;
+  setCreateMessage: (value: boolean) => void;
+  setFetchTrigger: (value: number | ((prev: number) => number)) => void;
+}
+
+function Form({ createMessage, setCreateMessage, setFetchTrigger }: FormProps) {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
     const localTime = new Date().toLocaleString('en-US', {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
     // Get input values
-    const user = e.target.user.value;
-    const message = e.target.message.value;
+    const form = e.target as HTMLFormElement;
+    const user = (form.elements.namedItem('user') as HTMLInputElement).value;
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
     // Send data to the backend
     const response = await fetch(`${baseUrl}/new`, {
       method: 'POST',
@@ -29,7 +36,7 @@ function Form({createMessage,setCreateMessage,setFetchTrigger}) {
     setFetchTrigger((prev)=> prev + 1);
   };
 
-  const handleExit =(e) =>{
+  const handleExit =() =>{
     console.log("buttonClicked");
     setCreateMessage(!createMessage);
   };

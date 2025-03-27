@@ -2,17 +2,26 @@ import { useEffect, useState } from 'react';
 import './App.scss';
 import Form from './views/Form';
 import Pagination from './views/Pagination';
-import MessageList from './views/messageList';
+import MessageList from './views/MessageList';
 
 function App() {
+  type Message = {
+    // example structure — adjust to match your API response
+    id: string;
+    username: string;
+    posted: string;
+    time_zone: string;
+    message: string;
+  };
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [fetchTrigger, setFetchTrigger] = useState(0);
+
+  
 
   const [createMessage,setCreateMessage] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchMessages = async () => {
@@ -23,14 +32,13 @@ function App() {
         setMessages(data.messages); 
   
         setTotalPages(data.totalPages); 
-        setTotalCount(data.totalCount); 
       } catch (err) {
         console.error('Error fetching messages:', err);
       }
     };
   
     fetchMessages();
-  }, [fetchTrigger,currentPage]);
+  }, [fetchTrigger, currentPage, baseUrl]);
 
   function showMessageForm(){
     setCreateMessage(!createMessage);

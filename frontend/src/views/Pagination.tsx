@@ -1,7 +1,13 @@
 
 import './Pagination.scss';
 
-const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: (page: number | ((prev: number) => number)) => void;
+}
+
+const Pagination = ({ currentPage, totalPages, setCurrentPage }: PaginationProps) => {
     const getPageNumbers = () => {
         const sidePages = 1; 
         const pages = [];
