@@ -11,9 +11,20 @@ const PORT = 5000;
 
 
 
-app.use(cors())
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://minimessageboard-production.up.railway.app',
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173' 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
 app.use(express.json()); 
 

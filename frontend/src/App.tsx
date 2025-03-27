@@ -13,13 +13,11 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
-
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/?page=${currentPage}&limit=${6}`
-        );
+        const response = await fetch(`${baseUrl}/?page=${currentPage}&limit=6`);
         const data = await response.json();
   
         setMessages(data.messages); 

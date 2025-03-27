@@ -1,7 +1,7 @@
 import './Form.scss'; 
 
 function Form({createMessage,setCreateMessage,setFetchTrigger}) {
-
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     const localTime = new Date().toLocaleString('en-US', {
@@ -11,7 +11,7 @@ function Form({createMessage,setCreateMessage,setFetchTrigger}) {
     const user = e.target.user.value;
     const message = e.target.message.value;
     // Send data to the backend
-    const response = await fetch('http://localhost:5000/new', {
+    const response = await fetch(`${baseUrl}/new`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
