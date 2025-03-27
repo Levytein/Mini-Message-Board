@@ -28,7 +28,16 @@ export async function getAllMessages(limit:number,offset:number) {
    }
   }
 
-export async function insertMessage(username:string,message:string,posted:string,timeZone:string) {
-  await pool.query("INSERT INTO messages (username,message,posted,time_zone) VALUES ($1,$2,$3,$4)", [username,message,posted,timeZone]);
-}
+  export async function insertMessage(
+    username: string, 
+    message: string, 
+    posted: string, 
+    timeZone: string
+  ): Promise<{ rows: any[] }> {
+    const result = await pool.query(
+      "INSERT INTO messages (username, message, posted, time_zone) VALUES ($1, $2, $3, $4) RETURNING *", 
+      [username, message, posted, timeZone]
+    );
+    return result;
+  }
 

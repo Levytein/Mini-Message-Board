@@ -11,6 +11,7 @@ const PORT = 5000;
 leoProfanity.loadDictionary('en');
 
 
+
 const allowedOrigins = [
   'http://localhost:5173',
   'https://minimessageboard-production.up.railway.app',
@@ -47,21 +48,29 @@ app.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch usernames' });
   }
 });
-app.post('/new', async (req: Request, res: Response) => {
-  const { user, message, posted, timeZone } = req.body; 
+app.post('/new', async (req, res) => {
+  try {
+    const { user, message, posted, timeZone } = req.body; 
 
-  const normalize = (text: string) =>
-    text.toLowerCase().replace(/[^a-z]/gi, '');
-  
-  if (
-    leoProfanity.check(normalize(user)) ||
-    leoProfanity.check(normalize(message))
-  ) {
-     res.status(400).json({ error: 'Explicit language is not allowed' });
+    const normalize = (text: string) =>
+      text.toLowerCase().replace(/[^a-z]/gi, '');
+    
+    if (
+      leoProfanity.check(normalize(user)) ||
+      leoProfanity.check(normalize(message))
+    ) {
+       res.status(400).json({ error: 'Explicit language is not allowed' });
+    }
+    
+    const result = await insertMessage(user, message, posted, timeZone);
+     res.status(201).json({ 
+      message: 'Form submitted successfully!', 
+      insertedRow: result.rows[0] 
+    });
+  } catch (error) {
+    console.error('Error in message submission:', error);
+     res.status(500).json({ error: 'Failed to submit message' });
   }
-  
-  await insertMessage(user, message, posted, timeZone);
-   res.send('Form submitted successfully!');
 });
 
 
