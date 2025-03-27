@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
-import {isProfane} from `leo-profanity`
+import {isProfane} from `leo-profanity`;
 import {getAllMessages,insertMessage} from './db/queries';
 
 
@@ -61,16 +61,6 @@ app.post('/new', async (req: Request, res: Response) => {
 });
 
 
-// --- Static Files in Production ---
-if (process.env.NODE_ENV === 'production') {
-  // Serve React static files
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-  // Catch-all route for React Router
-  app.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-  });
-}
 
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
