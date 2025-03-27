@@ -14,7 +14,7 @@ const PORT = 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'https://minimessageboard-production.up.railway.app',
-  'https://mini-message-board-vert.vercel.app/'
+  'https://mini-message-board-vert.vercel.app'
 ];
 
 app.use(cors({
