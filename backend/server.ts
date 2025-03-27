@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
-import {isProfane} from `leo-profanity`;
+import leoProfanity from 'leo-profanity';
 import {getAllMessages,insertMessage} from './db/queries';
 
 
@@ -50,7 +50,7 @@ app.get('/', async (req, res) => {
 app.post('/new', async (req: Request, res: Response) => {
   const { user, message, posted, timeZone } = req.body; 
 
-  if (isProfane(user) || isProfane(message)) {
+  if (leoProfanity.isProfane(user) || leoProfanity.isProfane(message)) {
     res.status(400).json({ error: 'Explicit language is not allowed' });
   }
   
