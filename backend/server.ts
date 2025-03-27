@@ -29,23 +29,20 @@ app.use(cors({
 app.use(express.json()); 
 
 app.get('/', async (req, res) => {
-
   try {
-    const page = parseInt(req.query.page as string, 10) || 1; 
-    const limit = parseInt(req.query.limit as string, 10) || 6; 
-
+    const page = parseInt(req.query.page as string, 10) || 1;
+    const limit = parseInt(req.query.limit as string, 10) || 6;
     const offset = (page - 1) * limit;
-    const result = await getAllMessages(limit,offset); 
 
-    const messages  = result.rows;
+    const result = await getAllMessages(limit, offset);
+    console.log('✅ DB result:', result);
+
+    const messages = result.rows;
     const totalCount = result.rows.length > 0 ? parseInt(result.rows[0].total_count, 10) : 0;
-    res.json({messages,
-      totalPages:Math.ceil(totalCount / limit),
-      totalCount,
-    }); 
-    
-  } catch (err) {
-    console.error('Error fetching usernames:', err);
+
+    res.json({ messages, totalPages: Math.ceil(totalCount / limit), totalCount });
+  } catch (err: any) {
+    console.error('❌ Error fetching usernames:', err.message || err);
     res.status(500).json({ error: 'Failed to fetch usernames' });
   }
 });
