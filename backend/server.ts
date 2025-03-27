@@ -60,6 +60,7 @@ app.post('/new', async (req, res) => {
       leoProfanity.check(normalize(message))
     ) {
        res.status(400).json({ error: 'Explicit language is not allowed' });
+       return;
     }
     
     const result = await insertMessage(user, message, posted, timeZone);
