@@ -1,14 +1,14 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
-import leoProfanity from 'leo-profanity';
+import * as leoProfanity from 'leo-profanity';
 import {getAllMessages,insertMessage} from './db/queries';
 
 
 // Initialize the Express app
 const app = express();
 const PORT = 5000;
-
+leoProfanity.loadDictionary('en');
 
 
 const allowedOrigins = [
