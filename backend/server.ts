@@ -50,8 +50,14 @@ app.get('/', async (req, res) => {
 app.post('/new', async (req: Request, res: Response) => {
   const { user, message, posted, timeZone } = req.body; 
 
-  if (leoProfanity.check(user) || leoProfanity.check(message)) {
-    res.status(400).json({ error: 'Explicit language is not allowed' });
+  const normalize = (text: string) =>
+    text.toLowerCase().replace(/[^a-z]/gi, '');
+  
+  if (
+    leoProfanity.check(normalize(user)) ||
+    leoProfanity.check(normalize(message))
+  ) {
+     res.status(400).json({ error: 'Explicit language is not allowed' });
   }
   
   await insertMessage(user, message, posted, timeZone);
